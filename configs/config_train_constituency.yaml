@@ -1,0 +1,59 @@
+name: 'Train our compositional model with a constituency parser'
+
+use_cuda: True
+device_id: 3
+is_debug: False
+
+# Input dataset.
+data_directory: 'multimodal_seq2seq_gSCAN/data/'
+target_vocabulary_file: 'training_target_vocab.txt'
+split: 'compositional_splits'  # options: demo_dataset, compositional_splits, target_length_split
+#split: 'demo_dataset'  # options: demo_dataset, compositional_splits, target_length_split
+max_seq_length: -1
+
+# How many examples from the adverb_1 split to move to train.
+k: 0
+
+# Represent the situation with 1 vector per grid cell. Otherwise, image.
+simple_situation_representation: True
+
+# Use attention map comparison to compare size
+compare_attention: True
+compare_weight: 1
+normalize_size: True
+
+# Not use attention map or not, doesn't work when compare_attention is True
+no_attention: False
+
+# Pass state vectors to parent
+pass_state: False
+
+# Parse type
+parse_type: 'constituency'
+
+# Training parameters.
+training_batch_size: 200
+lr: 0.001
+adam_beta_1: 0.9
+adam_beta_2: 0.999
+n_epochs: 1000
+cnn_kernel_size: 7
+cnn_num_channels: 50
+rnn_depth: 2
+rnn_dim: 20
+att_dim: 10
+output_dim: 9
+
+# Validation parameters
+max_steps: 120
+max_testing_examples: 2000
+
+# Saved model.
+model_prefix: 'models/comp_gscan_constituency/'
+resume_from_file: ''  # model file name of the model to be resumed from
+resume_n_update: 0    # from which update is the model from
+
+# Logging
+checkpoint_range: 500
+validate_every: 500
+

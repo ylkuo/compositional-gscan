@@ -1,0 +1,50 @@
+name: 'Test the no-attention ablation'
+
+use_cuda: True
+device_id: 2
+is_debug: False
+
+# Input dataset.
+data_directory: 'multimodal_seq2seq_gSCAN/data/'
+target_vocabulary_file: 'training_target_vocab.txt'
+split: 'compositional_splits'  # options: demo_dataset, compositional_splits, target_length_split
+# comma-separated list of splits to predict for
+splits: 'adverb_1,test,visual,visual_easier,situational_1,situational_2,contextual,adverb_2'
+
+# How many examples from the adverb_1 split to move to train.
+k: 0
+
+# Represent the situation with 1 vector per grid cell. Otherwise, image.
+simple_situation_representation: True
+
+# Use attention map comparison to compare size
+compare_attention: False
+compare_weight: 1
+normalize_size: False
+
+# Not use attention map or not, doesn't work when compare_attention is True
+no_attention: True
+
+# Pass state vectors to parent
+pass_state: True
+
+# Parse type
+parse_type: 'default'
+
+# Training parameters.
+cnn_kernel_size: 7
+cnn_num_channels: 50
+rnn_depth: 2
+rnn_dim: 40
+att_dim: 10
+output_dim: 9
+
+# Testing parameters.
+max_steps: 120
+output_directory: 'output/comp_gscan_no_att/'
+output_file_name: 'predict.json'
+save_prediction: False
+
+# Saved model.
+model_prefix: 'models/comp_gscan_no_att/'
+resume_from_file: 'model_best.pkl'

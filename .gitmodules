@@ -1,0 +1,3 @@
+[submodule "multimodal_seq2seq_gSCAN"]
+	path = multimodal_seq2seq_gSCAN
+	url = https://github.com/LauraRuis/multimodal_seq2seq_gSCAN.git
